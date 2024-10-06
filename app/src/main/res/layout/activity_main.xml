@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
@@ -17,17 +18,76 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="673dp">
+
+            <TextView
+                android:id="@+id/labelResultado"
+                android:layout_width="275dp"
+                android:layout_height="99dp"
+                android:layout_marginTop="360dp"
+                android:text="@string/labelResultado"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnCalcular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="480dp"
+                android:text="@string/btnCalcular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.47"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/txtValorB"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="208dp"
+                android:ems="10"
+                android:textColorHint="#000"
+                android:hint="@string/txtValorB"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned|numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/txtValorA"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="132dp"
+                android:ems="10"
+                android:hint="@string/txtValorA"
+                android:textColorHint="#000"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned|numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <EditText
+        android:id="@+id/txtValorC"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="272dp"
+        android:textColorHint="#000"
+        android:ems="10"
+        android:hint="@string/txtValorC"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned|numberDecimal"
+        app:layout_anchor="@+id/appBarLayout2"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,13 +2,8 @@ package com.example.teste;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
-import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,61 +13,60 @@ import com.example.teste.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    /*
+     *@author:<Fabiola / 111048231311>
+     */
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    private EditText txtValorA;
+    private EditText txtValorB;
+    private EditText txtValorC;
+    private TextView labelResultado;
+    private Button btnCalcular;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        txtValorA = findViewById(R.id.txtValorA);
+        txtValorB = findViewById(R.id.txtValorB);
+        txtValorC = findViewById(R.id.txtValorC);
+        btnCalcular = findViewById(R.id.btnCalcular);
+        labelResultado = findViewById(R.id.labelResultado);
 
-        setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
+        btnCalcular.setOnClickListener(op -> {
+            String resultado = calc();
+            labelResultado.setText(resultado);
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    private String calc(){
+        float a = Float.parseFloat(txtValorA.getText().toString());
+        float b = Float.parseFloat(txtValorB.getText().toString());
+        float c = Float.parseFloat(txtValorC.getText().toString());
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        float delta = (b * b) - (4 * a * c);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (delta < 0) {
+            return "Delta: "+ delta +"\nA equação não possui raízes reais.";
+        } else if (delta == 0) {
+            double x = -b / (2 * a);
+            return "Delta: "+ delta +"\nA equação possui uma raiz real: x = " + x;
+        } else {
+            double x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            double x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            return "Delta: "+ delta +"\nA equação possui duas raízes reais: x1 = " + x1 + ", x2 = " + x2;
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
